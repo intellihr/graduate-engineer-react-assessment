@@ -3,7 +3,8 @@ Hiring assessment based on React, Webpack &amp; ES6
 
 ## Setup
 1. Intall yarn globally `npm install -g yarn`
-1. Run `yarn dev`
+2. `yarn`
+3. Run Webpack Dev Server `yarn dev`
 
 ### Task 1 - As a user, I want to see all my to-do list, so that I know what to do today.
 #### Acceptance Criteria

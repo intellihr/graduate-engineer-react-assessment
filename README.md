@@ -7,7 +7,7 @@ Hiring assessment based on React, Webpack &amp; ES6
 3. Run Webpack Dev Server `yarn dev`
 
 ## Bouns
-1. Implemente this with Redux
+1. Implement this with Redux
 
 ### Task 1 - As a user, I want to see all my to-do list, so that I know what to do today.
 #### Acceptance Criteria

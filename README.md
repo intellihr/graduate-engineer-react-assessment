@@ -6,6 +6,11 @@ Hiring assessment based on React, Webpack &amp; ES6
 2. `yarn`
 3. Run Webpack Dev Server `yarn dev`
 
+## Tips
+1. Speak out loudly when you are thinking. We love to know how you solve the problems.
+2. KISS (Keep it simple stupid).
+3. If you decide to play dangerously (i.e. using Redux, FP, etc), impress us!
+
 ### Please check all the tasks before you continue. There is no strict order on how you complete them.
 ### Task 1 - As a user, I want to see all my to-do list, so that I know what to do today.
 #### Acceptance Criteria
@@ -32,6 +37,3 @@ Hiring assessment based on React, Webpack &amp; ES6
 ### Task 5 - As a userm, I want to see some input errors, so that I can aviod putting invalid item
 1. Name and description are mandatory
 2. I should see errors if the name has less than 5 characters
-
-## Bouns
-1. Implement this with Redux (If you don't know what Redux is, just leave it. No harms.)

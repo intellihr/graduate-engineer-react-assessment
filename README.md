@@ -17,13 +17,13 @@ React Hiring assessment
 ### Task - Cryptocurrency Portfolio
 #### User Stories
 1. I should be able to add a transaction with the following details:
-  a. Which crypto-currency I bought.
-  c. How many units have been bought.
-  d. What was the price per unit in AUD at the time of the transaction.
+   - Which crypto-currency I bought.
+   - How many units have been bought.
+   - What was the price per unit in AUD at the time of the transaction.
 2. I should be able to see a list of all my transactions grouped by crypto-currency. It should show the following details:
-  a. Amount of units currently owned.
-  b. Total worth in AUD.
-  c. What percentage of my portfolio is allocated to this crypto-currency.
+   - Amount of units currently owned.
+   - Total worth in AUD.
+   - What percentage of my portfolio is allocated to this crypto-currency.
 3. I should be able to see my net worth.
 4. I should be able to remove a transaction.
 5. I should be able to update a transaction.

@@ -8,8 +8,9 @@ Hiring assessment based on React, Webpack &amp; ES6
 
 ## Tips
 1. Speak out loudly when you are thinking. We love to know how you solve the problems.
-2. KISS (Keep it simple stupid).
-3. If you decide to play dangerously (i.e. using Redux, FP, etc), impress us!
+2. You may use any libraries as you wish.
+3. Feel free to Google. We don't test your memory.
+4. If you decide to play dangerously (i.e. using Redux, FP, etc), impress us!
 
 ### Please check all the tasks before you continue. There is no strict order on how you complete them.
 ### Task 1 - As a user, I want to see all my to-do list, so that I know what to do today.

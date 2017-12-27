@@ -14,7 +14,7 @@ React Hiring assessment
 5. If you decide to play dangerously (i.e. using Redux, FP, etc), impress us!
 
 ### Please check all the tasks before you continue. There is no strict order on how you complete them.
-### Task - Cryptocurrency Portfolio
+### Task - Cryptocurrency Portfolio (e.g. [Blockfolio](https://www.blockfolio.com/))
 #### User Stories
 1. I should be able to add a transaction with the following details:
    - Which crypto-currency I bought.

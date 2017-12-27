@@ -16,7 +16,7 @@ Hiring assessment based on React, Webpack &amp; ES6
 ### Please check all the tasks before you continue. There is no strict order on how you complete them.
 ### Task - Cryptocurrency Portfolio
 #### Acceptance Criteria
-1. I should be able to enter the details (i.e. What currency, how much and how many) of the buys
+1. I should be able to enter the details (i.e. What currency, how much and how many) of my buys
 2. I should be able to see a list of all my buys
 3. I should be able to see the total worths of my buys
 4. I should be able to remove my buys

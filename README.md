@@ -1,37 +1,33 @@
 # React Assessment
-Hiring assessment based on React, Webpack &amp; ES6
+React Hiring assessment
 
 ## Setup
 1. Intall yarn globally `npm install -g yarn`
 2. `yarn`
 3. Run Webpack Dev Server `yarn dev`
 
+## Tips
+1. Speak out loudly when you are thinking. We love to know how you solve the problems.
+2. You may use any libraries as you wish.
+3. Feel free to Google. We don't test your memory.
+4. You may ask any questions.
+5. If you decide to play dangerously (i.e. using Redux, FP, etc), impress us!
+
 ### Please check all the tasks before you continue. There is no strict order on how you complete them.
-### Task 1 - As a user, I want to see all my to-do list, so that I know what to do today.
+### Task - Cryptocurrency Portfolio (e.g. [Blockfolio](https://www.blockfolio.com/))
+#### User Stories
+1. I should be able to add a transaction with the following details:
+   - Which crypto-currency I bought.
+   - How many units have been bought.
+   - What was the price per unit in AUD at the time of the transaction.
+2. I should be able to see a list of all my transactions grouped by crypto-currency. It should show the following details:
+   - Amount of units currently owned.
+   - Total worth in AUD.
+   - What percentage of my portfolio is allocated to this crypto-currency.
+3. I should be able to see my net worth.
+4. I should be able to remove a transaction.
+5. I should be able to update a transaction.
+
 #### Acceptance Criteria
-1. I should see all my todo list with its name and description
-
-### Task 2 - As a user, I want to add a to-do, so that I can manage my to-do list.
-#### Acceptance Criteria
-1. I should see a create button in the to-do list page.
-2. When I click the create button, it will show me a creat to-do form.
-3. When I submit the form, it will add a new todo list.
-
-### Task 3 - As a user, I want to update a to-do, so that I can manage my to-do list.
-#### Acceptance Criteria
-1. I should see an edit button for each to-do
-2. When I click the edit button, it will show me a edit to-do form.
-3. I should see the existing value in each fields.
-4. When I submit the form, it will update the to-do list
-
-### Task 4 - As a user, I want to delete a to-do, so that i can manage my to-do list.
-#### Acceptance Criteria
-1. I should see a delete button in each of the to-do
-2. When I click it, it should remove the to-do from the list.
-
-### Task 5 - As a userm, I want to see some input errors, so that I can aviod putting invalid item
-1. Name and description are mandatory
-2. I should see errors if the name has less than 5 characters
-
-## Bouns
-1. Implement this with Redux (If you don't know what Redux is, just leave it. No harms.)
+1. I should be able to use the portfolio to follow my crypto-currency purchases.
+2. The portfolio should be mobile friendly (Boostrap, Foundation, etc can be used).

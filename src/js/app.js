@@ -1,8 +1,7 @@
 import { render } from 'react-dom'
+import HelloWorld from './HelloWorld'
 
 render(
-  <div>
-    Hello World!
-  </div>,
+  <HelloWorld />,
   document.getElementById('app')
 )

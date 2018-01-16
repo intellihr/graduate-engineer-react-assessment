@@ -1,13 +1,17 @@
 const path = require('path')
-const  HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
+  devServer: {
+    port: 8080,
+    historyApiFallback: true
+  },
   devtool: process.env.NODE_ENV === 'production' ? 'cheap-module-source-map' : 'inline-source-map',
   entry: [
     'babel-polyfill',
     './src/js/app.js',
-    './src/scss/app.scss',
+    './src/scss/app.scss'
   ],
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -21,7 +25,7 @@ module.exports = {
       template: './src/index.ejs',
       appMountId: 'app'
     }),
-    new ExtractTextPlugin('./css/bundle-[chunkhash].css'),
+    new ExtractTextPlugin('./css/bundle-[chunkhash].css')
   ],
   module: {
     rules: [

@@ -31,3 +31,6 @@ React Hiring assessment
 #### Acceptance Criteria
 1. I should be able to use the portfolio to follow my crypto-currency purchases.
 2. The portfolio should be mobile friendly (Boostrap, Foundation, etc can be used).
+
+#### Bonus
+1. Consume CoinMarketCap Public API (https://coinmarketcap.com/api/)

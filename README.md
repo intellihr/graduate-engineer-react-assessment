@@ -1,36 +1,32 @@
-# React Assessment
-React Hiring assessment
+# Cryptocurrency Portfolio
+Hiring assessment for frontend web application development using React.
 
 ## Setup
-1. Intall yarn globally `npm install -g yarn`
-2. `yarn`
-3. Run Webpack Dev Server `yarn dev`
+1. Install `yarn` (for example, `npm install -g yarn`)
+1. Run `yarn`
+1. Run Webpack Dev Server `yarn dev`
 
 ## Tips
-1. Speak out loudly when you are thinking. We love to know how you solve the problems.
-2. You may use any libraries as you wish.
-3. Feel free to Google. We don't test your memory.
-4. You may ask any questions.
-5. If you decide to play dangerously (i.e. using Redux, FP, etc), impress us!
+1. Give running commentary of your thought process so we can best understand your approach.
+1. You can use any libraries you want. There's no need to reinvent the wheel.
+1. Feel free to Google. We're not testing your memory.
+1. We encourage you to ask questions and involve your intelliHR engineer. You can almost think of this as a pair programming exercise.
+1. If you'd like to be adventurous (e.g. use Redux, functional programming, etc.), impress us!
 
-### Please check all the tasks before you continue. There is no strict order on how you complete them.
-### Task - Cryptocurrency Portfolio (e.g. [Blockfolio](https://www.blockfolio.com/))
-#### User Stories
-1. I should be able to add a transaction with the following details:
-   - Which crypto-currency I bought.
-   - How many units have been bought.
-   - What was the price per unit in AUD at the time of the transaction.
-2. I should be able to see a list of all my transactions grouped by crypto-currency. It should show the following details:
-   - Amount of units currently owned.
-   - Total worth in AUD.
-   - What percentage of my portfolio is allocated to this crypto-currency.
-3. I should be able to see my net worth.
-4. I should be able to remove a transaction.
-5. I should be able to update a transaction.
+## Project: Cryptocurrency Portfolio 
+Please read all of the project details before starting. Feel free to complete them in any order that makes sense to you.
 
-#### Acceptance Criteria
-1. I should be able to use the portfolio to follow my crypto-currency purchases.
-2. The portfolio should be mobile friendly (Boostrap, Foundation, etc can be used).
+### User Stories
+1. I must be able to record a transaction with the following details:
+   - What cryptocurrency was purchased
+   - How many units of the cryptocurrency were purchased
+   - What was the total purchase price, in AUD, of the transaction
+1. I must be able to see a list of all of my recorded transactions grouped by cryptocurrency. For each cryptocurrency owned, show the following:
+   - Units owned
+   - Total paid in AUD
+1. I must be able to see the sum total AUD I have paid for all of my cryptocurrencies.
+1. I must be able to delete transactions.
+1. I must be able to edit transactions.
 
-#### Bonus
-1. Consume CoinMarketCap Public API (https://coinmarketcap.com/api/)
+### Stretch Goals
+1. I may be able to see the value of my cryptocurrencies based on the current price published by an exchange or index website. For example,  CoinMarketCap Public API (https://coinmarketcap.com/api/).

@@ -28,22 +28,33 @@ export default class Transactions extends React.Component {
             transactions: [
                 {
                     currency: "Garlic Coin",
+                    unit: 10,
                     cost: 20
                 },
                 {
                     currency: "Doge Coin",
+                    unit: 5,
                     cost: 50
                 }
             ]
         };
     }
 
+    addTransaction(currency, unit, cost) {
+        this.setState((prevState) => ({
+            transactions: prevState.transactions.concat({
+                currency: currency,
+                unit: unit,
+                cost: cost
+            })
+        }));
+    }
+
     render() {
         return (
             <div>
                 <h1>Transactions</h1>
-                {this.state.transactions.map((transaction, index) => (<Transaction currency={transaction.currency} cost={transaction.cost} />))}
-                
+                {this.state.transactions.map((transaction, index) => (<Transaction key={index} currency={transaction.currency} unit={transaction.unit} cost={transaction.cost} />))}
             </div>
           )
     };
@@ -56,7 +67,7 @@ class Transaction extends React.Component {
 
     render() {
         return (
-            <p>{this.props.currency}: ${this.props.cost} AUD</p>
+            <p>{this.props.unit} x {this.props.currency}: ${this.props.cost} AUD</p>
         )
     }
 }

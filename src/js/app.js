@@ -1,10 +1,10 @@
 import { render } from 'react-dom'
 import { BrowserRouter, Route } from 'react-router-dom'
-import HelloWorld from './HelloWorld'
+import Transactions from './Transactions'
 
 render(
   <BrowserRouter>
-    <Route exact path='/hello' component={HelloWorld} />
+    <Route exact path='/transactions' component={Transactions} />
   </BrowserRouter>,
   document.getElementById('app')
 )

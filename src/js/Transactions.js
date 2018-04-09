@@ -20,33 +20,57 @@
 
 
 import React from 'react'
+import uniqid from 'uniqid'
 
 export default class Transactions extends React.Component {
     constructor(props) {
         super(props);
+        this.addTransaction = this.addTransaction.bind(this);
+        this.removeTransaction = this.removeTransaction.bind(this);
         this.state = {
             transactions: [
                 {
-                    currency: "Garlic Coin",
+                    id: 1,
+                    currency_id: 1,
                     unit: 10,
                     cost: 20
                 },
                 {
-                    currency: "Doge Coin",
+                    id: 2,
+                    currency_id: 2,
                     unit: 5,
                     cost: 50
+                }
+            ],
+            currencies: [
+                {
+                    id: 1,
+                    name: "Garlic Coin",
+                    costPerUnit: 10
+                },
+                {
+                    id: 2,
+                    name: "Doge Coin",
+                    costPerUnit: 5
                 }
             ]
         };
     }
 
-    addTransaction(currency, unit, cost) {
+    addTransaction(currency_id, unit, cost) {
         this.setState((prevState) => ({
             transactions: prevState.transactions.concat({
-                currency: currency,
+                id: uniqid(),
+                currency_id: currency_id,
                 unit: unit,
                 cost: cost
             })
+        }));
+    }
+
+    removeTransaction(id) {
+        this.setState((prevState) => ({
+            transactions: prevState.transactions.filter((transaction) => transaction.id !== id)
         }));
     }
 
@@ -54,7 +78,11 @@ export default class Transactions extends React.Component {
         return (
             <div>
                 <h1>Transactions</h1>
-                {this.state.transactions.map((transaction, index) => (<Transaction key={index} currency={transaction.currency} unit={transaction.unit} cost={transaction.cost} />))}
+                
+                {this.state.transactions.map((transaction, index) => {
+                    const currency = this.state.currencies.find(function (currency) { return currency.id === transaction.currency_id; });
+                    return <Transaction key={index} currency={currency.name} unit={transaction.unit} cost={transaction.cost} />
+                })}
             </div>
           )
     };

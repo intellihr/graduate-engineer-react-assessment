@@ -73,6 +73,11 @@ export default class Transactions extends React.Component {
         }));
     }
 
+    editTransaction(id, currency_id, unit, totalCost) {
+        this.removeTransaction(id);
+        this.addTransaction(currency_id, unit, totalCost);
+    }
+
     transactionsForCurrency(currency_id) {
         const groupedDetails = this.state.transactions.filter((transaction) => transaction.currency_id == currency_id)
         return groupedDetails;

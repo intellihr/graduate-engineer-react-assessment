@@ -149,22 +149,30 @@ export default class Transactions extends React.Component {
                         })}
                     </tbody>
                 </table>
+                
+                <form onSubmit={this.handleAddTransaction}>
+                <table className="table">
+                    <tr>
+                        <td>
+                            <select required className="form-control" name="currency">
+                                <option value="" defaultValue hidden>Select Currency</option>
+                                {this.state.currencies.map((currency, index) => {
+                                    return <option value={currency.id} key={currency.id}>{currency.name}</option>
+                                })}
+                            </select>
+                        </td>
+                        <td>
+                            <input className="form-control" type="number" min="1" id="units" placeholder="Units Purchased"/>
+                        </td>
+                        <td>
+                            <input className="form-control" type="number" min="1" id="totalCost" placeholder="Total Cost (AUD)"/>
+                        </td>
+                    </tr>
+                </table>
+                <button className="btn btn-primary">Add Transaction</button>
+                </form>
                 {//this.getCurrencyTotals()
                 }
-
-                <form onSubmit={this.handleAddTransaction}>
-                    <div className="form-group row justify-content-md-center">
-                        <select required className="col-sm-2 form-control" name="currency">
-                            <option value="" defaultValue hidden>Select Currency</option>
-                            {this.state.currencies.map((currency, index) => {
-                                return <option value={currency.id} key={currency.id}>{currency.name}</option>
-                            })}
-                        </select>
-                        <input className="col-sm-2 form-control" type="number" min="1" id="units" placeholder="Units Purchased"/>
-                        <input className="col-sm-2 form-control" type="number" min="1" id="totalCost" placeholder="Total Cost (AUD)"/>
-                        <button className="btn btn-primary">Add Transaction</button>
-                    </div>
-                </form>
             </div>
           )
     };

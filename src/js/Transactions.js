@@ -151,41 +151,35 @@ export default class Transactions extends React.Component {
                 </table>
                 
                 <form onSubmit={this.handleAddTransaction}>
-                <table className="table">
-                    <tr>
-                        <td>
-                            <select required className="form-control" name="currency">
-                                <option value="" defaultValue hidden>Select Currency</option>
-                                {this.state.currencies.map((currency, index) => {
-                                    return <option value={currency.id} key={currency.id}>{currency.name}</option>
-                                })}
-                            </select>
-                        </td>
-                        <td>
-                            <input className="form-control" type="number" min="1" id="units" placeholder="Units Purchased"/>
-                        </td>
-                        <td>
-                            <input className="form-control" type="number" min="1" id="totalCost" placeholder="Total Cost (AUD)"/>
-                        </td>
-                    </tr>
-                </table>
-                <button className="btn btn-primary">Add Transaction</button>
+                    <table className="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select required className="form-control" name="currency">
+                                        <option value="" defaultValue hidden>Select Currency</option>
+                                        {this.state.currencies.map((currency, index) => {
+                                            return <option value={currency.id} key={currency.id}>{currency.name}</option>
+                                        })}
+                                    </select>
+                                </td>
+                                <td>
+                                    <input className="form-control" type="number" min="1" id="units" placeholder="Units Purchased"/>
+                                </td>
+                                <td>
+                                    <input className="form-control" type="number" min="1" id="totalCost" placeholder="Total Cost (AUD)"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button className="btn btn-primary">Add Transaction</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </form>
                 {//this.getCurrencyTotals()
                 }
             </div>
           )
     };
-}
-
-class Transaction extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <p>{this.props.units} x {this.props.currency}: ${this.props.totalCost} AUD</p>
-        )
-    }
 }

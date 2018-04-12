@@ -128,16 +128,32 @@ export default class Transactions extends React.Component {
         return (
             <div>
                 <h1>Transactions</h1>
-                
-                {this.state.transactions.map((transaction, index) => {
-                    const currency = this.state.currencies.find((currency) => currency.id === transaction.currency_id);
-                    return <Transaction key={index} currency={currency.name} units={transaction.units} totalCost={transaction.totalCost} />
-                })}
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Currency Type</th>
+                            <th scope="col">Units Purchased</th>
+                            <th scope="col">Total Cost (AUD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.transactions.map((transaction, index) => {
+                            const currency = this.state.currencies.find((currency) => currency.id === transaction.currency_id);
+                            return (
+                                <tr key={transaction.id}>
+                                    <td>{currency.name}</td>
+                                    <td>{transaction.units}</td>
+                                    <td>${transaction.totalCost}</td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
                 {//this.getCurrencyTotals()
                 }
 
                 <form onSubmit={this.handleAddTransaction}>
-                    <div className="form-group row">
+                    <div className="form-group row justify-content-md-center">
                         <select required className="col-sm-2 form-control" name="currency">
                             <option value="" defaultValue hidden>Select Currency</option>
                             {this.state.currencies.map((currency, index) => {
@@ -146,9 +162,8 @@ export default class Transactions extends React.Component {
                         </select>
                         <input className="col-sm-2 form-control" type="number" min="1" id="units" placeholder="Units Purchased"/>
                         <input className="col-sm-2 form-control" type="number" min="1" id="totalCost" placeholder="Total Cost (AUD)"/>
+                        <button className="btn btn-primary">Add Transaction</button>
                     </div>
-
-                    <button className="btn btn-primary">Add Transaction</button>
                 </form>
             </div>
           )

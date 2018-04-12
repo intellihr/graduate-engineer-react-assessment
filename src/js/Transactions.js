@@ -134,6 +134,7 @@ export default class Transactions extends React.Component {
                             <th scope="col">Currency Type</th>
                             <th scope="col">Units Purchased</th>
                             <th scope="col">Total Cost (AUD)</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -144,6 +145,11 @@ export default class Transactions extends React.Component {
                                     <td>{currency.name}</td>
                                     <td>{transaction.units}</td>
                                     <td>${transaction.totalCost}</td>
+                                    <td>
+                                        <button className="btn btn-danger" onClick={(e) => {
+                                            this.removeTransaction(transaction.id);
+                                        }}>Remove</button>
+                                    </td>
                                 </tr>
                             );
                         })}
@@ -168,8 +174,6 @@ export default class Transactions extends React.Component {
                                 <td>
                                     <input className="form-control" type="number" min="1" id="totalCost" placeholder="Total Cost (AUD)"/>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <button className="btn btn-primary">Add Transaction</button>
                                 </td>

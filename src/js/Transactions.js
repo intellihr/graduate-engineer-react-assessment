@@ -10,6 +10,10 @@
 // 1. I must be able to delete transactions.
 // 1. I must be able to edit transactions.
 
+// Notes:
+// 1. Added uniqid package to generate uniqid's which will not need validation to ensure uniqueness
+// 2. Working with whole numbers, as opposed to decimals, for simplicity
+
 import React from 'react'
 import uniqid from 'uniqid'
 
@@ -20,24 +24,25 @@ export default class Transactions extends React.Component {
         this.removeTransaction = this.removeTransaction.bind(this);
         this.transactionsForCurrency = this.transactionsForCurrency.bind(this);
         this.getCurrencyTotals = this.getCurrencyTotals.bind(this);
+        this.handleAddTransaction = this.handleAddTransaction.bind(this);
         this.state = {
             transactions: [
                 {
                     id: 1,
                     currency_id: 1,
-                    unit: 10,
+                    units: 10,
                     totalCost: 20
                 },
                 {
                     id: 2,
                     currency_id: 2,
-                    unit: 5,
+                    units: 5,
                     totalCost: 50
                 },
                 {
                     id: 3,
                     currency_id: 1,
-                    unit: 50,
+                    units: 50,
                     totalCost: 100
                 }
             ],
@@ -56,15 +61,28 @@ export default class Transactions extends React.Component {
         };
     }
 
-    addTransaction(currency_id, unit, totalCost) {
+    addTransaction(currency_id, units, totalCost) {
         this.setState((prevState) => ({
             transactions: prevState.transactions.concat({
                 id: uniqid(),
                 currency_id: currency_id,
-                unit: unit,
+                units: units,
                 totalCost: totalCost
             })
         }));
+    }
+
+    handleAddTransaction(e) {
+        e.preventDefault(); // do not reload the whole page on form submission
+
+        const currencyID = parseInt(e.target.elements.currency.value);
+        const units = parseInt(e.target.elements.units.value);
+        const totalCost = parseInt(e.target.elements.totalCost.value);
+
+        this.addTransaction(currencyID,units,totalCost);
+
+        e.target.elements.units.value = '';
+        e.target.elements.totalCost.value = '';
     }
 
     removeTransaction(id) {
@@ -73,9 +91,9 @@ export default class Transactions extends React.Component {
         }));
     }
 
-    editTransaction(id, currency_id, unit, totalCost) {
+    editTransaction(id, currency_id, units, totalCost) {
         this.removeTransaction(id);
-        this.addTransaction(currency_id, unit, totalCost);
+        this.addTransaction(currency_id, units, totalCost);
     }
 
     transactionsForCurrency(currency_id) {
@@ -99,6 +117,13 @@ export default class Transactions extends React.Component {
         return currencies;
     }
 
+    // todo
+    // 1. Form to add new transactions
+    // 2. Delete button on transactions
+    // 3. Edit form for transactions
+    // 4. Separate view for grouped transactions
+    // 5. Add the list of transactions to the grouped transactions output
+
     render() {
         return (
             <div>
@@ -106,9 +131,25 @@ export default class Transactions extends React.Component {
                 
                 {this.state.transactions.map((transaction, index) => {
                     const currency = this.state.currencies.find((currency) => currency.id === transaction.currency_id);
-                    return <Transaction key={index} currency={currency.name} unit={transaction.unit} totalCost={transaction.totalCost} />
+                    return <Transaction key={index} currency={currency.name} units={transaction.units} totalCost={transaction.totalCost} />
                 })}
-                {this.getCurrencyTotals()}
+                {//this.getCurrencyTotals()
+                }
+
+                <form onSubmit={this.handleAddTransaction}>
+                    <div className="form-group row">
+                        <select required className="col-sm-2 form-control" name="currency">
+                            <option value="" defaultValue hidden>Select Currency</option>
+                            {this.state.currencies.map((currency, index) => {
+                                return <option value={currency.id} key={currency.id}>{currency.name}</option>
+                            })}
+                        </select>
+                        <input className="col-sm-2 form-control" type="number" min="1" id="units" placeholder="Units Purchased"/>
+                        <input className="col-sm-2 form-control" type="number" min="1" id="totalCost" placeholder="Total Cost (AUD)"/>
+                    </div>
+
+                    <button className="btn btn-primary">Add Transaction</button>
+                </form>
             </div>
           )
     };
@@ -121,7 +162,7 @@ class Transaction extends React.Component {
 
     render() {
         return (
-            <p>{this.props.unit} x {this.props.currency}: ${this.props.totalCost} AUD</p>
+            <p>{this.props.units} x {this.props.currency}: ${this.props.totalCost} AUD</p>
         )
     }
 }

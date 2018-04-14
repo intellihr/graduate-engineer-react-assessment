@@ -91,6 +91,10 @@ export default class Transactions extends React.Component {
         }));
     }
 
+    handleEditTransaction(id) {
+        console.log(id);
+    }
+
     editTransaction(id, currency_id, units, totalCost) {
         this.removeTransaction(id);
         this.addTransaction(currency_id, units, totalCost);
@@ -135,6 +139,7 @@ export default class Transactions extends React.Component {
                             <th scope="col">Units Purchased</th>
                             <th scope="col">Total Cost (AUD)</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -145,6 +150,11 @@ export default class Transactions extends React.Component {
                                     <td>{currency.name}</td>
                                     <td>{transaction.units}</td>
                                     <td>${transaction.totalCost}</td>
+                                    <td>
+                                        <button className="btn btn-warning" onClick={(e) => {
+                                            this.handleEditTransaction(transaction.id);
+                                        }}>Edit</button>
+                                    </td>
                                     <td>
                                         <button className="btn btn-danger" onClick={(e) => {
                                             this.removeTransaction(transaction.id);

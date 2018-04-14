@@ -25,6 +25,9 @@ export default class Transactions extends React.Component {
         this.transactionsForCurrency = this.transactionsForCurrency.bind(this);
         this.getCurrencyTotals = this.getCurrencyTotals.bind(this);
         this.handleAddTransaction = this.handleAddTransaction.bind(this);
+        this.allTransactionsTableRows = this.allTransactionsTableRows.bind(this);
+        this.addTransactionForm = this.addTransactionForm.bind(this);
+        this.renderAllTransactions = this.renderAllTransactions.bind(this);
         this.state = {
             transactions: [
                 {
@@ -101,8 +104,7 @@ export default class Transactions extends React.Component {
     }
 
     transactionsForCurrency(currency_id) {
-        const groupedDetails = this.state.transactions.filter((transaction) => transaction.currency_id == currency_id)
-        return groupedDetails;
+        return this.state.transactions.filter((transaction) => transaction.currency_id == currency_id)
     }
 
     getCurrencyTotals() {
@@ -112,88 +114,103 @@ export default class Transactions extends React.Component {
         currencies = distinctCurrencies.map(currencyID => {
             const currency = this.state.currencies.find((currency) => currency.id === currencyID);
             const currencyTransactions = this.transactionsForCurrency(currencyID);
-            const currencySum = Object.keys(currencyTransactions).reduce((sum, key) => {
-                return sum + currencyTransactions[key].totalCost;
-            }, 0);
-            return <div key={currencyID}>{currency.name} total cost: ${currencySum}</div>
+            const sumOfTransactions = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].totalCost, 0);
+            return <div key={currencyID}>{currency.name} total cost: ${sumOfTransactions}</div>
         })
 
         return currencies;
     }
 
     // todo
-    // 1. Form to add new transactions
-    // 2. Delete button on transactions
-    // 3. Edit form for transactions
-    // 4. Separate view for grouped transactions
-    // 5. Add the list of transactions to the grouped transactions output
+    // 1. Edit form for transactions
+    // 2. Separate view for grouped transactions
+    // 3. Add the list of transactions to the grouped transactions output
+    // 4. Move currencies into their own class
+    // 5. Move individual transactions into their own class
 
-    render() {
+    tableHeader() {
+        return (
+            <thead>
+                <tr>
+                    <th scope="col">Currency Type</th>
+                    <th scope="col">Units Purchased</th>
+                    <th scope="col">Total Cost (AUD)</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+        );
+    }
+
+    allTransactionsTableRows() {
+        return this.state.transactions.map((transaction, index) => {
+            const currency = this.state.currencies.find((currency) => currency.id === transaction.currency_id);
+            return (
+                <tr key={transaction.id}>
+                    <td>{currency.name}</td>
+                    <td>{transaction.units}</td>
+                    <td>${transaction.totalCost}</td>
+                    <td>
+                        <button className="btn btn-warning" onClick={(e) => {
+                            this.handleEditTransaction(transaction.id);
+                        }}>Edit</button>
+                    </td>
+                    <td>
+                        <button className="btn btn-danger" onClick={(e) => {
+                            this.removeTransaction(transaction.id);
+                        }}>Remove</button>
+                    </td>
+                </tr>
+            );
+        })
+    }
+
+    addTransactionForm() {
+        return (
+            <form onSubmit={this.handleAddTransaction}>
+                <table className="table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select required className="form-control" name="currency">
+                                    <option value="" defaultValue hidden>Select Currency</option>
+                                    {this.state.currencies.map((currency, index) => {
+                                        return <option value={currency.id} key={currency.id}>{currency.name}</option>
+                                    })}
+                                </select>
+                            </td>
+                            <td>
+                                <input className="form-control" type="number" min="1" id="units" placeholder="Units Purchased"/>
+                            </td>
+                            <td>
+                                <input className="form-control" type="number" min="1" id="totalCost" placeholder="Total Cost (AUD)"/>
+                            </td>
+                            <td>
+                                <button className="btn btn-primary">Add Transaction</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        );
+    }
+
+    renderAllTransactions() {
         return (
             <div>
                 <h1 className="display-4">Transactions</h1>
                 <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Currency Type</th>
-                            <th scope="col">Units Purchased</th>
-                            <th scope="col">Total Cost (AUD)</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
+                    {this.tableHeader()}
                     <tbody>
-                        {this.state.transactions.map((transaction, index) => {
-                            const currency = this.state.currencies.find((currency) => currency.id === transaction.currency_id);
-                            return (
-                                <tr key={transaction.id}>
-                                    <td>{currency.name}</td>
-                                    <td>{transaction.units}</td>
-                                    <td>${transaction.totalCost}</td>
-                                    <td>
-                                        <button className="btn btn-warning" onClick={(e) => {
-                                            this.handleEditTransaction(transaction.id);
-                                        }}>Edit</button>
-                                    </td>
-                                    <td>
-                                        <button className="btn btn-danger" onClick={(e) => {
-                                            this.removeTransaction(transaction.id);
-                                        }}>Remove</button>
-                                    </td>
-                                </tr>
-                            );
-                        })}
+                        {this.allTransactionsTableRows()}
                     </tbody>
                 </table>
-                
-                <form onSubmit={this.handleAddTransaction}>
-                    <table className="table">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <select required className="form-control" name="currency">
-                                        <option value="" defaultValue hidden>Select Currency</option>
-                                        {this.state.currencies.map((currency, index) => {
-                                            return <option value={currency.id} key={currency.id}>{currency.name}</option>
-                                        })}
-                                    </select>
-                                </td>
-                                <td>
-                                    <input className="form-control" type="number" min="1" id="units" placeholder="Units Purchased"/>
-                                </td>
-                                <td>
-                                    <input className="form-control" type="number" min="1" id="totalCost" placeholder="Total Cost (AUD)"/>
-                                </td>
-                                <td>
-                                    <button className="btn btn-primary">Add Transaction</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
-                {//this.getCurrencyTotals()
-                }
+                {this.addTransactionForm()}
             </div>
           )
+    }
+
+    render() {
+        return this.renderAllTransactions();
     };
 }

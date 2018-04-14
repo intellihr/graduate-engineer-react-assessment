@@ -23,11 +23,11 @@ export default class Transactions extends React.Component {
         this.addTransaction = this.addTransaction.bind(this);
         this.removeTransaction = this.removeTransaction.bind(this);
         this.transactionsForCurrency = this.transactionsForCurrency.bind(this);
-        this.getCurrencyTotals = this.getCurrencyTotals.bind(this);
         this.handleAddTransaction = this.handleAddTransaction.bind(this);
         this.allTransactionsTableRows = this.allTransactionsTableRows.bind(this);
         this.addTransactionForm = this.addTransactionForm.bind(this);
         this.renderAllTransactions = this.renderAllTransactions.bind(this);
+        this.transactionRow = this.transactionRow.bind(this);
         this.state = {
             transactions: [
                 {
@@ -103,24 +103,6 @@ export default class Transactions extends React.Component {
         this.addTransaction(currency_id, units, totalCost);
     }
 
-    transactionsForCurrency(currency_id) {
-        return this.state.transactions.filter((transaction) => transaction.currency_id == currency_id)
-    }
-
-    getCurrencyTotals() {
-        let currencies = [];
-        const distinctCurrencies = [...new Set(this.state.transactions.map((transaction, index) => transaction.currency_id))];
-
-        currencies = distinctCurrencies.map(currencyID => {
-            const currency = this.state.currencies.find((currency) => currency.id === currencyID);
-            const currencyTransactions = this.transactionsForCurrency(currencyID);
-            const sumOfTransactions = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].totalCost, 0);
-            return <div key={currencyID}>{currency.name} total cost: ${sumOfTransactions}</div>
-        })
-
-        return currencies;
-    }
-
     // todo
     // 1. Edit form for transactions
     // 2. Separate view for grouped transactions
@@ -142,26 +124,31 @@ export default class Transactions extends React.Component {
         );
     }
 
+    transactionRow(transaction) {
+        const currency = this.state.currencies.find((currency) => currency.id === transaction.currency_id);
+        return (
+            <tr key={transaction.id}>
+                <td>{currency.name}</td>
+                <td>{transaction.units}</td>
+                <td>${transaction.totalCost}</td>
+                <td>
+                    <button className="btn btn-warning" onClick={(e) => {
+                        this.handleEditTransaction(transaction.id);
+                    }}>Edit</button>
+                </td>
+                <td>
+                    <button className="btn btn-danger" onClick={(e) => {
+                        this.removeTransaction(transaction.id);
+                    }}>Remove</button>
+                </td>
+            </tr>
+        );
+    }
+
     allTransactionsTableRows() {
         return this.state.transactions.map((transaction, index) => {
             const currency = this.state.currencies.find((currency) => currency.id === transaction.currency_id);
-            return (
-                <tr key={transaction.id}>
-                    <td>{currency.name}</td>
-                    <td>{transaction.units}</td>
-                    <td>${transaction.totalCost}</td>
-                    <td>
-                        <button className="btn btn-warning" onClick={(e) => {
-                            this.handleEditTransaction(transaction.id);
-                        }}>Edit</button>
-                    </td>
-                    <td>
-                        <button className="btn btn-danger" onClick={(e) => {
-                            this.removeTransaction(transaction.id);
-                        }}>Remove</button>
-                    </td>
-                </tr>
-            );
+            return this.transactionRow(transaction);
         })
     }
 
@@ -210,7 +197,52 @@ export default class Transactions extends React.Component {
           )
     }
 
+    transactionsForCurrency(currency_id) {
+        return this.state.transactions.filter((transaction) => transaction.currency_id == currency_id)
+    }
+
+    renderGroupedTransactions() {
+        const distinctCurrencies = [...new Set(this.state.transactions.map((transaction, index) => transaction.currency_id))];
+
+        return (
+            <div>
+                <h1 className="display-4">Grouped Transactions</h1>
+                <table className="table">
+                    {this.tableHeader()}
+                    <tbody>
+                        {
+                            distinctCurrencies.map(currencyID => {
+
+                                const currency = this.state.currencies.find((currency) => currency.id === currencyID);
+                                const currencyTransactions = this.transactionsForCurrency(currencyID);
+                                const totalCost = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].totalCost, 0);
+                                const totalUnits = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].units, 0);
+
+                                let output = currencyTransactions.map((transaction, index) => {
+                                    return this.transactionRow(transaction);
+                                });
+
+                                output.push(
+                                    <tr>
+                                        <td></td>
+                                        <td><b>{totalUnits}</b></td>
+                                        <td><b>${totalCost}</b></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                );
+
+                                return output;
+                            })
+                        }
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+
     render() {
-        return this.renderAllTransactions();
+        return this.renderGroupedTransactions();
+        // return this.renderAllTransactions();
     };
 }

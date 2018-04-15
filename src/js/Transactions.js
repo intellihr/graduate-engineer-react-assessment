@@ -30,26 +30,7 @@ export default class Transactions extends React.Component {
         this.renderAllTransactions = this.renderAllTransactions.bind(this);
         this.transactionRow = this.transactionRow.bind(this);
         this.state = {
-            transactions: [
-                {
-                    id: 1,
-                    currency_id: 1,
-                    units: 10,
-                    totalCost: 20
-                },
-                {
-                    id: 2,
-                    currency_id: 2,
-                    units: 5,
-                    totalCost: 50
-                },
-                {
-                    id: 3,
-                    currency_id: 1,
-                    units: 50,
-                    totalCost: 100
-                }
-            ],
+            transactions: [],
             currencies: [
                 new Currency("Garlic Coin", 10),
                 new Currency("Doge Coin", 5)
@@ -71,7 +52,7 @@ export default class Transactions extends React.Component {
     handleAddTransaction(e) {
         e.preventDefault(); // do not reload the whole page on form submission
 
-        const currencyID = parseInt(e.target.elements.currency.value);
+        const currencyID = e.target.elements.currency.value;
         const units = parseInt(e.target.elements.units.value);
         const totalCost = parseInt(e.target.elements.totalCost.value);
 
@@ -236,7 +217,6 @@ export default class Transactions extends React.Component {
 
     render() {
         // return this.renderGroupedTransactions();
-        console.log(this.state.currencies2);
         return this.renderAllTransactions();
     };
 }

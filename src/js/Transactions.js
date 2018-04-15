@@ -11,11 +11,10 @@
 // 1. I must be able to edit transactions.
 
 // Notes:
-// 1. Added uniqid package to generate uniqid's which will not need validation to ensure uniqueness
+// 1. Added uuid package to generate unique IDs
 // 2. Working with whole numbers, as opposed to decimals, for simplicity
 
 import React from 'react'
-import uniqid from 'uniqid'
 import Currency from './Currency';
 import Transaction from './Transaction';
 
@@ -72,11 +71,6 @@ export default class Transactions extends React.Component {
         this.removeTransaction(id);
         this.addTransaction(currencyID, units, totalCost);
     }
-
-    // todo
-    // 1. Edit form for transactions
-    // 2. Separate view for grouped transactions
-    // 3. Add the list of transactions to the grouped transactions output
 
     tableHeader() {
         return (
@@ -213,4 +207,9 @@ export default class Transactions extends React.Component {
         // return this.renderGroupedTransactions();
         return this.renderAllTransactions();
     };
+
+    // todo
+    // 1. Add ability to change between views
+    // 2. Create a class for utilities for building the tables (to tidy up this class)
+    // 3. Add ability to edit transactions
 }

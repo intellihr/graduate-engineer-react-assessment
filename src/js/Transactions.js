@@ -17,6 +17,7 @@
 import React from 'react'
 import uniqid from 'uniqid'
 import Currency from './Currency';
+import Transaction from './Transaction';
 
 export default class Transactions extends React.Component {
     constructor(props) {
@@ -38,14 +39,9 @@ export default class Transactions extends React.Component {
         };
     }
 
-    addTransaction(currency_id, units, totalCost) {
+    addTransaction(currencyID, units, totalCost) {
         this.setState((prevState) => ({
-            transactions: prevState.transactions.concat({
-                id: uniqid(),
-                currency_id: currency_id,
-                units: units,
-                totalCost: totalCost
-            })
+            transactions: prevState.transactions.concat(new Transaction(currencyID, units, totalCost))
         }));
     }
 
@@ -72,17 +68,15 @@ export default class Transactions extends React.Component {
         console.log(id);
     }
 
-    editTransaction(id, currency_id, units, totalCost) {
+    editTransaction(id, currencyID, units, totalCost) {
         this.removeTransaction(id);
-        this.addTransaction(currency_id, units, totalCost);
+        this.addTransaction(currencyID, units, totalCost);
     }
 
     // todo
     // 1. Edit form for transactions
     // 2. Separate view for grouped transactions
     // 3. Add the list of transactions to the grouped transactions output
-    // 4. Move currencies into their own class
-    // 5. Move individual transactions into their own class
 
     tableHeader() {
         return (
@@ -99,7 +93,7 @@ export default class Transactions extends React.Component {
     }
 
     transactionRow(transaction) {
-        const currency = this.state.currencies.find((currency) => currency.id === transaction.currency_id);
+        const currency = this.state.currencies.find((currency) => currency.id === transaction.currencyID);
         return (
             <tr key={transaction.id}>
                 <td>{currency.name}</td>
@@ -121,7 +115,7 @@ export default class Transactions extends React.Component {
 
     allTransactionsTableRows() {
         return this.state.transactions.map((transaction, index) => {
-            const currency = this.state.currencies.find((currency) => currency.id === transaction.currency_id);
+            const currency = this.state.currencies.find((currency) => currency.id === transaction.currencyID);
             return this.transactionRow(transaction);
         })
     }
@@ -171,12 +165,12 @@ export default class Transactions extends React.Component {
           )
     }
 
-    transactionsForCurrency(currency_id) {
-        return this.state.transactions.filter((transaction) => transaction.currency_id == currency_id)
+    transactionsForCurrency(currencyID) {
+        return this.state.transactions.filter((transaction) => transaction.currencyID == currencyID)
     }
 
     renderGroupedTransactions() {
-        const distinctCurrencies = [...new Set(this.state.transactions.map((transaction, index) => transaction.currency_id))];
+        const distinctCurrencies = [...new Set(this.state.transactions.map((transaction, index) => transaction.currencyID))];
 
         return (
             <div>

@@ -16,6 +16,7 @@
 
 import React from 'react'
 import uniqid from 'uniqid'
+import Currency from './Currency';
 
 export default class Transactions extends React.Component {
     constructor(props) {
@@ -50,16 +51,8 @@ export default class Transactions extends React.Component {
                 }
             ],
             currencies: [
-                {
-                    id: 1,
-                    name: "Garlic Coin",
-                    costPerUnit: 10
-                },
-                {
-                    id: 2,
-                    name: "Doge Coin",
-                    costPerUnit: 5
-                }
+                new Currency("Garlic Coin", 10),
+                new Currency("Doge Coin", 5)
             ]
         };
     }
@@ -242,7 +235,8 @@ export default class Transactions extends React.Component {
     }
 
     render() {
-        return this.renderGroupedTransactions();
-        // return this.renderAllTransactions();
+        // return this.renderGroupedTransactions();
+        console.log(this.state.currencies2);
+        return this.renderAllTransactions();
     };
 }

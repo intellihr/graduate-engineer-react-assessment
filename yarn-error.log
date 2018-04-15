@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js dev
+  /usr/bin/node /usr/share/yarn/bin/yarn.js install uuid
 
 PATH: 
   /home/kaitlyn/Documents/aws-mfa.sh:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -8,7 +8,7 @@ Yarn version:
   1.5.1
 
 Node version: 
-  8.11.0
+  8.11.1
 
 Platform: 
   linux x64
@@ -43,7 +43,8 @@ npm manifest:
       "react": "^15.5.4",
       "react-dom": "^15.5.4",
       "react-router-dom": "^4.2.2",
-      "uniqid": "^4.1.1"
+      "uniqid": "^4.1.1",
+      "uuid": "^3.2.1"
     },
     "scripts": {
       "dev": "webpack-dev-server --content-base public/build"
@@ -4031,7 +4032,7 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff"
   
-  uniqid@^4.0.0:
+  uniqid@^4.0.0, uniqid@^4.1.1:
     version "4.1.1"
     resolved "https://registry.yarnpkg.com/uniqid/-/uniqid-4.1.1.tgz#89220ddf6b751ae52b5f72484863528596bb84c1"
     dependencies:
@@ -4332,17 +4333,10 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: Command failed.
-  Exit code: 127
-  Command: sh
-  Arguments: -c webpack-dev-server --content-base public/build
-  Directory: /home/kaitlyn/Documents/workspace/simple-react-assessment
-  Output:
-  
-      at ProcessTermError.MessageError (/usr/share/yarn/lib/cli.js:186:110)
-      at new ProcessTermError (/usr/share/yarn/lib/cli.js:226:113)
-      at ChildProcess.<anonymous> (/usr/share/yarn/lib/cli.js:30281:17)
-      at emitTwo (events.js:126:13)
-      at ChildProcess.emit (events.js:214:7)
-      at maybeClose (internal/child_process.js:925:16)
-      at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)
+  Error: `install` has been replaced with `add` to add new dependencies. Run "yarn add uuid" instead.
+      at new MessageError (/usr/share/yarn/lib/cli.js:186:110)
+      at Object.<anonymous> (/usr/share/yarn/lib/cli.js:21987:13)
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:98:30)
+      at /usr/share/yarn/lib/cli.js:109:13
+      at <anonymous>

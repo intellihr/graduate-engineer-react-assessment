@@ -27,7 +27,8 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.2.2",
-    "uniqid": "^4.1.1"
+    "uniqid": "^4.1.1",
+    "uuid": "^3.2.1"
   },
   "scripts": {
     "dev": "webpack-dev-server --content-base public/build"

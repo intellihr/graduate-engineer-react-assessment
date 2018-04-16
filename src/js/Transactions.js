@@ -15,8 +15,9 @@
 // 2. Working with whole numbers, as opposed to decimals, for simplicity
 
 import React from 'react'
-import Currency from './Currency';
-import Transaction from './Transaction';
+import Currency from './Currency'
+import Transaction from './Transaction'
+import TableGenerator from './TableGenerator'
 
 export default class Transactions extends React.Component {
     constructor(props) {
@@ -70,20 +71,6 @@ export default class Transactions extends React.Component {
     editTransaction(id, currencyID, units, totalCost) {
         this.removeTransaction(id);
         this.addTransaction(currencyID, units, totalCost);
-    }
-
-    tableHeader() {
-        return (
-            <thead>
-                <tr>
-                    <th scope="col">Currency Type</th>
-                    <th scope="col">Units Purchased</th>
-                    <th scope="col">Total Cost (AUD)</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-        );
     }
 
     transactionRow(transaction) {
@@ -149,7 +136,7 @@ export default class Transactions extends React.Component {
             <div>
                 <h1 className="display-4">Transactions</h1>
                 <table className="table">
-                    {this.tableHeader()}
+                    {TableGenerator.generateHeader(["Currency Type", "Units Purchased", "Total Cost (AUD)", "", ""])}
                     <tbody>
                         {this.allTransactionsTableRows()}
                     </tbody>
@@ -170,7 +157,7 @@ export default class Transactions extends React.Component {
             <div>
                 <h1 className="display-4">Grouped Transactions</h1>
                 <table className="table">
-                    {this.tableHeader()}
+                    {TableGenerator.generateHeader(["Currency Type", "Units Purchased", "Total Cost (AUD)", "", ""])}
                     <tbody>
                         {
                             distinctCurrencies.map(currencyID => {

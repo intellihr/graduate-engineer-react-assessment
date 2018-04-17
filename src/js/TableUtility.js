@@ -1,8 +1,8 @@
 import uuid from 'uuid'
 
-export default class TableGenerator {
+export default class TableUtility {
 
-    static generateHeader(columns) {
+    static generateHeaderRow(columns) {
         return (
             <thead>
                 <tr>

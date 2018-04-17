@@ -17,7 +17,7 @@
 import React from 'react'
 import Currency from './Currency'
 import Transaction from './Transaction'
-import TableGenerator from './TableGenerator'
+import TableUtility from './TableUtility'
 
 export default class Transactions extends React.Component {
     constructor(props) {
@@ -30,6 +30,7 @@ export default class Transactions extends React.Component {
         this.addTransactionForm = this.addTransactionForm.bind(this);
         this.renderAllTransactions = this.renderAllTransactions.bind(this);
         this.transactionRow = this.transactionRow.bind(this);
+        this.handleEditTransaction = this.handleEditTransaction.bind(this);
         this.state = {
             transactions: [],
             currencies: [
@@ -77,7 +78,7 @@ export default class Transactions extends React.Component {
         const currency = this.state.currencies.find((currency) => currency.id === transaction.currencyID)
         const editFunction = (e) => this.handleEditTransaction(transaction.id)
         const deleteFunction = (e) => this.removeTransaction(transaction.id)
-        return TableGenerator.generateTransactionRow(transaction.id, currency.name, transaction.units, transaction.totalCost, editFunction, deleteFunction)
+        return TableUtility.generateTransactionRow(transaction.id, currency.name, transaction.units, transaction.totalCost, editFunction, deleteFunction)
     }
 
     allTransactionsTableRows() {
@@ -88,7 +89,7 @@ export default class Transactions extends React.Component {
     }
 
     addTransactionForm() {
-        return TableGenerator.generateAddTransactionForm(this.state.currencies, this.handleAddTransaction)
+        return TableUtility.generateAddTransactionForm(this.state.currencies, this.handleAddTransaction)
     }
 
     renderAllTransactions() {
@@ -96,7 +97,7 @@ export default class Transactions extends React.Component {
             <div>
                 <h1 className="display-4">Transactions</h1>
                 <table className="table">
-                    {TableGenerator.generateHeader(["Currency Type", "Units Purchased", "Total Cost (AUD)", "", ""])}
+                    {TableUtility.generateHeaderRow(["Currency Type", "Units Purchased", "Total Cost (AUD)", "", ""])}
                     <tbody>
                         {this.allTransactionsTableRows()}
                     </tbody>
@@ -117,7 +118,7 @@ export default class Transactions extends React.Component {
             <div>
                 <h1 className="display-4">Grouped Transactions</h1>
                 <table className="table">
-                    {TableGenerator.generateHeader(["Currency Type", "Units Purchased", "Total Cost (AUD)", "", ""])}
+                    {TableUtility.generateHeaderRow(["Currency Type", "Units Purchased", "Total Cost (AUD)", "", ""])}
                     <tbody>
                         {
                             distinctCurrencies.map(currencyID => {
@@ -131,7 +132,7 @@ export default class Transactions extends React.Component {
                                     return this.transactionRow(transaction);
                                 });
 
-                                output.push(TableGenerator.generateRow(["", totalUnits, `$${totalCost}`, "", ""]))
+                                output.push(TableUtility.generateRow(["", totalUnits, `$${totalCost}`, "", ""]))
 
                                 return output;
                             })

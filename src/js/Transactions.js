@@ -74,24 +74,10 @@ export default class Transactions extends React.Component {
     }
 
     transactionRow(transaction) {
-        const currency = this.state.currencies.find((currency) => currency.id === transaction.currencyID);
-        return (
-            <tr key={transaction.id}>
-                <td>{currency.name}</td>
-                <td>{transaction.units}</td>
-                <td>${transaction.totalCost}</td>
-                <td>
-                    <button className="btn btn-warning" onClick={(e) => {
-                        this.handleEditTransaction(transaction.id);
-                    }}>Edit</button>
-                </td>
-                <td>
-                    <button className="btn btn-danger" onClick={(e) => {
-                        this.removeTransaction(transaction.id);
-                    }}>Remove</button>
-                </td>
-            </tr>
-        );
+        const currency = this.state.currencies.find((currency) => currency.id === transaction.currencyID)
+        const editFunction = (e) => this.handleEditTransaction(transaction.id)
+        const deleteFunction = (e) => this.removeTransaction(transaction.id)
+        return TableGenerator.generateTransactionRow(transaction.id, currency.name, transaction.units, transaction.totalCost, editFunction, deleteFunction)
     }
 
     allTransactionsTableRows() {

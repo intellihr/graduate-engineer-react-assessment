@@ -12,6 +12,14 @@ export default class TableGenerator {
         )
     }
 
+    static generateRow(columns) {
+        return (
+            <tr>
+                {columns.map((column) => <td key={uuid()} scope="col">{column}</td>)}
+            </tr>
+        )
+    }
+
     static generateTransactionRow(id, currencyName, units, totalCost, editFunction, deleteFunction) {
         return (
             <tr key={id}>
@@ -26,5 +34,35 @@ export default class TableGenerator {
                 </td>
             </tr>
         )
+    }
+
+    static generateAddTransactionForm(currencies, addTransactionFunction) {
+        return (
+            <form onSubmit={addTransactionFunction}>
+                <table className="table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select required className="form-control" name="currency">
+                                    <option value="" defaultValue hidden>Select Currency</option>
+                                    {currencies.map((currency, index) => {
+                                        return <option value={currency.id} key={currency.id}>{currency.name}</option>
+                                    })}
+                                </select>
+                            </td>
+                            <td>
+                                <input className="form-control" type="number" min="1" id="units" placeholder="Units Purchased"/>
+                            </td>
+                            <td>
+                                <input className="form-control" type="number" min="1" id="totalCost" placeholder="Total Cost (AUD)"/>
+                            </td>
+                            <td>
+                                <button className="btn btn-primary">Add Transaction</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        );
     }
 }

@@ -21,57 +21,57 @@ import TableUtility from './TableUtility'
 
 export default class Transactions extends React.Component {
     constructor(props) {
-        super(props);
-        this.addTransaction = this.addTransaction.bind(this);
-        this.removeTransaction = this.removeTransaction.bind(this);
-        this.transactionsForCurrency = this.transactionsForCurrency.bind(this);
-        this.handleAddTransaction = this.handleAddTransaction.bind(this);
-        this.allTransactionsTableRows = this.allTransactionsTableRows.bind(this);
-        this.addTransactionForm = this.addTransactionForm.bind(this);
-        this.transactionRow = this.transactionRow.bind(this);
-        this.handleEditTransaction = this.handleEditTransaction.bind(this);
-        this.renderTransactionsTotal = this.renderTransactionsTotal.bind(this);
+        super(props)
+        this.addTransaction = this.addTransaction.bind(this)
+        this.removeTransaction = this.removeTransaction.bind(this)
+        this.transactionsForCurrency = this.transactionsForCurrency.bind(this)
+        this.handleAddTransaction = this.handleAddTransaction.bind(this)
+        this.allTransactionsTableRows = this.allTransactionsTableRows.bind(this)
+        this.addTransactionForm = this.addTransactionForm.bind(this)
+        this.transactionRow = this.transactionRow.bind(this)
+        this.handleEditTransaction = this.handleEditTransaction.bind(this)
+        this.renderTransactionsTotal = this.renderTransactionsTotal.bind(this)
         this.state = {
             transactions: [],
             currencies: [
                 new Currency("Garlic Coin", 10),
                 new Currency("Doge Coin", 5)
             ]
-        };
+        }
     }
 
     addTransaction(currencyID, units, totalCost) {
         this.setState((prevState) => ({
             transactions: prevState.transactions.concat(new Transaction(currencyID, units, totalCost))
-        }));
+        }))
     }
 
     handleAddTransaction(e) {
-        e.preventDefault(); // do not reload the whole page on form submission
+        e.preventDefault() // do not reload the whole page on form submission
 
-        const currencyID = e.target.elements.currency.value;
-        const units = parseInt(e.target.elements.units.value);
-        const totalCost = parseInt(e.target.elements.totalCost.value);
+        const currencyID = e.target.elements.currency.value
+        const units = parseInt(e.target.elements.units.value)
+        const totalCost = parseInt(e.target.elements.totalCost.value)
 
-        this.addTransaction(currencyID,units,totalCost);
+        this.addTransaction(currencyID,units,totalCost)
 
-        e.target.elements.units.value = '';
-        e.target.elements.totalCost.value = '';
+        e.target.elements.units.value = ''
+        e.target.elements.totalCost.value = ''
     }
 
     removeTransaction(id) {
         this.setState((prevState) => ({
             transactions: prevState.transactions.filter((transaction) => transaction.id !== id)
-        }));
+        }))
     }
 
     handleEditTransaction(id) {
-        console.log(id);
+        console.log(id)
     }
 
     editTransaction(id, currencyID, units, totalCost) {
-        this.removeTransaction(id);
-        this.addTransaction(currencyID, units, totalCost);
+        this.removeTransaction(id)
+        this.addTransaction(currencyID, units, totalCost)
     }
 
     transactionRow(transaction) {
@@ -83,8 +83,7 @@ export default class Transactions extends React.Component {
 
     allTransactionsTableRows() {
         return this.state.transactions.map((transaction, index) => {
-            const currency = this.state.currencies.find((currency) => currency.id === transaction.currencyID);
-            return this.transactionRow(transaction);
+            return this.transactionRow(transaction)
         })
     }
 
@@ -97,28 +96,28 @@ export default class Transactions extends React.Component {
     }
 
     renderGroupedTransactions() {
-        const distinctCurrencies = [...new Set(this.state.transactions.map((transaction, index) => transaction.currencyID))];
+        const distinctCurrencies = [...new Set(this.state.transactions.map((transaction, index) => transaction.currencyID))]
 
         return distinctCurrencies.map(currencyID => {
 
-            const currency = this.state.currencies.find((currency) => currency.id === currencyID);
-            const currencyTransactions = this.transactionsForCurrency(currencyID);
-            const totalCost = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].totalCost, 0);
-            const totalUnits = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].units, 0);
+            const currency = this.state.currencies.find((currency) => currency.id === currencyID)
+            const currencyTransactions = this.transactionsForCurrency(currencyID)
+            const totalCost = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].totalCost, 0)
+            const totalUnits = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].units, 0)
 
             let output = currencyTransactions.map((transaction, index) => {
-                return this.transactionRow(transaction);
-            });
+                return this.transactionRow(transaction)
+            })
 
             output.push(TableUtility.generateRow([`${currency.name} Total`, totalUnits, `$${totalCost}`, "", ""], "table-info"))
 
-            return output;
+            return output
         })
     }
 
     renderTransactionsTotal() {
-        const totalCost = Object.keys(this.state.transactions).reduce((sum, key) => sum + this.state.transactions[key].totalCost, 0);
-        const totalUnits = Object.keys(this.state.transactions).reduce((sum, key) => sum + this.state.transactions[key].units, 0);
+        const totalCost = Object.keys(this.state.transactions).reduce((sum, key) => sum + this.state.transactions[key].totalCost, 0)
+        const totalUnits = Object.keys(this.state.transactions).reduce((sum, key) => sum + this.state.transactions[key].units, 0)
 
         if (totalUnits != 0) {
             return TableUtility.generateRow([`All Transactions Total`, totalUnits, `$${totalCost}`, "", ""], "table-success")

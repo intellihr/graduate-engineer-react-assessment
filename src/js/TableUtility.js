@@ -63,6 +63,6 @@ export default class TableUtility {
                     </tbody>
                 </table>
             </form>
-        );
+        )
     }
 }

@@ -12,10 +12,10 @@ export default class TableUtility {
         )
     }
 
-    static generateRow(columns) {
+    static generateRow(columns, className = "table-light") {
         return (
             <tr>
-                {columns.map((column) => <td key={uuid()} scope="col">{column}</td>)}
+                {columns.map((column) => <td className={className} key={uuid()} scope="col">{column}</td>)}
             </tr>
         )
     }

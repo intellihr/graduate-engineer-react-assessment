@@ -28,7 +28,6 @@ export default class Transactions extends React.Component {
         this.handleAddTransaction = this.handleAddTransaction.bind(this);
         this.allTransactionsTableRows = this.allTransactionsTableRows.bind(this);
         this.addTransactionForm = this.addTransactionForm.bind(this);
-        this.renderAllTransactions = this.renderAllTransactions.bind(this);
         this.transactionRow = this.transactionRow.bind(this);
         this.handleEditTransaction = this.handleEditTransaction.bind(this);
         this.state = {
@@ -92,21 +91,6 @@ export default class Transactions extends React.Component {
         return TableUtility.generateAddTransactionForm(this.state.currencies, this.handleAddTransaction)
     }
 
-    renderAllTransactions() {
-        return (
-            <div>
-                <h1 className="display-4">Transactions</h1>
-                <table className="table">
-                    {TableUtility.generateHeaderRow(["Currency Type", "Units Purchased", "Total Cost (AUD)", "", ""])}
-                    <tbody>
-                        {this.allTransactionsTableRows()}
-                    </tbody>
-                </table>
-                {this.addTransactionForm()}
-            </div>
-          )
-    }
-
     transactionsForCurrency(currencyID) {
         return this.state.transactions.filter((transaction) => transaction.currencyID == currencyID)
     }
@@ -116,7 +100,7 @@ export default class Transactions extends React.Component {
 
         return (
             <div>
-                <h1 className="display-4">Grouped Transactions</h1>
+                <h1 className="display-4">Transactions</h1>
                 <table className="table">
                     {TableUtility.generateHeaderRow(["Currency Type", "Units Purchased", "Total Cost (AUD)", "", ""])}
                     <tbody>
@@ -132,24 +116,24 @@ export default class Transactions extends React.Component {
                                     return this.transactionRow(transaction);
                                 });
 
-                                output.push(TableUtility.generateRow(["", totalUnits, `$${totalCost}`, "", ""]))
+                                output.push(TableUtility.generateRow([`${currency.name} Total`, totalUnits, `$${totalCost}`, "", ""], "table-info"))
 
                                 return output;
                             })
                         }
                     </tbody>
                 </table>
+                {this.addTransactionForm()}
             </div>
         );
     }
 
     render() {
-        // return this.renderGroupedTransactions();
-        return this.renderAllTransactions();
+        return this.renderGroupedTransactions();
     };
 
     // todo
-    // 1. Add ability to change between views
-    // 2. Create a class for utilities for building the tables (to tidy up this class)
-    // 3. Add ability to edit transactions
+    // 1. Change default view to seeing transactions grouped - we do not need the non-grouped view
+    // 2. Add ability to edit transactions
+    // 3. Resolve issue where no value can be entered in the form number fields
 }

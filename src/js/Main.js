@@ -1,7 +1,7 @@
 import { Switch, Route } from 'react-router-dom'
 import Currency from './Currency'
 import Transaction from './Transaction'
-import Transactions from './Transactions'
+import GroupedTransactions from './GroupedTransactions'
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ export default class Main extends React.Component {
     return (
       <Switch>
       <Route exact path='/' render={() => (
-        <Transactions
+        <GroupedTransactions
           addTransaction={this.addTransaction}
           removeTransaction={this.removeTransaction}
           editTransaction={this.editTransaction}

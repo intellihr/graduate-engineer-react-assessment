@@ -17,7 +17,7 @@
 import React from 'react'
 import TableUtility from './TableUtility'
 
-export default class Transactions extends React.Component {
+export default class GroupedTransactions extends React.Component {
     constructor(props) {
         super(props)
         this.transactionsForCurrency = this.transactionsForCurrency.bind(this)

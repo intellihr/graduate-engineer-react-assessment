@@ -30,6 +30,7 @@ export default class Transactions extends React.Component {
         this.addTransactionForm = this.addTransactionForm.bind(this);
         this.transactionRow = this.transactionRow.bind(this);
         this.handleEditTransaction = this.handleEditTransaction.bind(this);
+        this.renderTransactionsTotal = this.renderTransactionsTotal.bind(this);
         this.state = {
             transactions: [],
             currencies: [
@@ -98,42 +99,49 @@ export default class Transactions extends React.Component {
     renderGroupedTransactions() {
         const distinctCurrencies = [...new Set(this.state.transactions.map((transaction, index) => transaction.currencyID))];
 
+        return distinctCurrencies.map(currencyID => {
+
+            const currency = this.state.currencies.find((currency) => currency.id === currencyID);
+            const currencyTransactions = this.transactionsForCurrency(currencyID);
+            const totalCost = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].totalCost, 0);
+            const totalUnits = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].units, 0);
+
+            let output = currencyTransactions.map((transaction, index) => {
+                return this.transactionRow(transaction);
+            });
+
+            output.push(TableUtility.generateRow([`${currency.name} Total`, totalUnits, `$${totalCost}`, "", ""], "table-info"))
+
+            return output;
+        })
+    }
+
+    renderTransactionsTotal() {
+        const totalCost = Object.keys(this.state.transactions).reduce((sum, key) => sum + this.state.transactions[key].totalCost, 0);
+        const totalUnits = Object.keys(this.state.transactions).reduce((sum, key) => sum + this.state.transactions[key].units, 0);
+
+        if (totalUnits != 0) {
+            return TableUtility.generateRow([`All Transactions Total`, totalUnits, `$${totalCost}`, "", ""], "table-success")
+        }
+    }
+
+    render() {
         return (
             <div>
                 <h1 className="display-4">Transactions</h1>
                 <table className="table">
                     {TableUtility.generateHeaderRow(["Currency Type", "Units Purchased", "Total Cost (AUD)", "", ""])}
                     <tbody>
-                        {
-                            distinctCurrencies.map(currencyID => {
-
-                                const currency = this.state.currencies.find((currency) => currency.id === currencyID);
-                                const currencyTransactions = this.transactionsForCurrency(currencyID);
-                                const totalCost = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].totalCost, 0);
-                                const totalUnits = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].units, 0);
-
-                                let output = currencyTransactions.map((transaction, index) => {
-                                    return this.transactionRow(transaction);
-                                });
-
-                                output.push(TableUtility.generateRow([`${currency.name} Total`, totalUnits, `$${totalCost}`, "", ""], "table-info"))
-
-                                return output;
-                            })
-                        }
+                        {this.renderGroupedTransactions()}
+                        {this.renderTransactionsTotal()}
                     </tbody>
                 </table>
                 {this.addTransactionForm()}
             </div>
-        );
+        )
     }
 
-    render() {
-        return this.renderGroupedTransactions();
-    };
-
     // todo
-    // 1. Change default view to seeing transactions grouped - we do not need the non-grouped view
-    // 2. Add ability to edit transactions
-    // 3. Resolve issue where no value can be entered in the form number fields
+    // 1. Add ability to edit transactions
+    // 2. Resolve issue where no value can be entered in the form number fields
 }

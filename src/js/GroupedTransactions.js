@@ -1,19 +1,3 @@
-// ### User Stories
-// 1. I must be able to record a transaction with the following details:
-//    - What cryptocurrency was purchased
-//    - How many units of the cryptocurrency were purchased
-//    - What was the total purchase price, in AUD, of the transaction
-// 1. I must be able to see a list of all of my recorded transactions grouped by cryptocurrency. For each cryptocurrency owned, show the following:
-//    - Units owned
-//    - Total paid in AUD
-// 1. I must be able to see the sum total AUD I have paid for all of my cryptocurrencies.
-// 1. I must be able to delete transactions.
-// 1. I must be able to edit transactions.
-
-// Notes:
-// 1. Added uuid package to generate unique IDs
-// 2. Working with whole numbers, as opposed to decimals, for simplicity
-
 import React from 'react'
 import TableUtility from './TableUtility'
 
@@ -124,7 +108,4 @@ export default class GroupedTransactions extends React.Component {
             </div>
         )
     }
-
-    // todo
-    // 1. Return success message for when transaction has been edited successfully (or route the user back to the grouped transactions page)
 }

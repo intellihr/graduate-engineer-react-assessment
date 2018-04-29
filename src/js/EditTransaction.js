@@ -1,4 +1,5 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 import TableUtility from './TableUtility'
 import {isUndefined} from 'lodash'
 
@@ -6,6 +7,10 @@ export default class EditTransaction extends React.Component {
     constructor(props) {
         super(props)
         this.handleEditTransaction = this.handleEditTransaction.bind(this)
+
+        this.state = {
+            shouldRoute: false
+        }
     }
 
     get editTransactionForm () {
@@ -23,6 +28,16 @@ export default class EditTransaction extends React.Component {
         return TableUtility.generateEditTransactionForm(transaction, currencies, this.handleEditTransaction)
     }
 
+    get shouldRoute () {
+        const {
+            shouldRoute
+        } = this.state
+
+        if (shouldRoute) {
+            return <Redirect to='/' />
+        }
+    }
+
     handleEditTransaction(e) {
         const {
             transaction,
@@ -36,6 +51,10 @@ export default class EditTransaction extends React.Component {
         const totalCost = parseInt(e.target.elements.totalCost.value)
 
         editTransaction(transaction.id, currencyID, units, totalCost)
+
+        this.setState(() => ({
+            shouldRoute: true
+        }))
     }
 
     render() {
@@ -43,6 +62,7 @@ export default class EditTransaction extends React.Component {
             <div>
                 <h1 className="display-4">Update Transaction</h1>
                 {this.editTransactionForm}
+                {this.shouldRoute}
             </div>
         )
     }

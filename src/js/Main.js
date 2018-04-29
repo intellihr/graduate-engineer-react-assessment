@@ -1,3 +1,8 @@
+// Notes:
+// 1. Added uuid package to generate unique IDs
+// 2. Working with whole numbers, as opposed to decimals, for simplicity
+// 3. Assumed that the user does not define the currencies that are valid, but rather a list is provided
+
 import { Switch, Route } from 'react-router-dom'
 import Currency from './Currency'
 import Transaction from './Transaction'

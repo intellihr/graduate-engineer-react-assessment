@@ -1,5 +1,9 @@
+import { Link } from 'react-router-dom'
+
 const Header = () => (
-    <h1>Navigation Bar Here</h1>
+    <nav className="nav nav-tabs">
+        <Link className="nav-link" to='/'>Transactions</Link>
+    </nav>
 )
 
 export default Header

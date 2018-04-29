@@ -34,8 +34,8 @@ export default class Main extends React.Component {
   }
 
   editTransaction(id, currencyID, units, totalCost) {
-    this.removeTransaction(id)
-    this.addTransaction(currencyID, units, totalCost)
+    const transaction = this.state.transactions.filter((transaction) => transaction.id == id)[0]
+    transaction.updateTransaction(currencyID, units, totalCost)
   }
 
   render() {
@@ -52,7 +52,7 @@ export default class Main extends React.Component {
       <Route path='/edit/:transaction' render={(props) => (
         <EditTransaction
           editTransaction={this.editTransaction}
-          transaction={this.state.transactions.filter((transaction) => transaction.id == props.match.params.transaction)}
+          transaction={this.state.transactions.filter((transaction) => transaction.id == props.match.params.transaction)[0]}
           currencies={this.state.currencies}
         />
       )} />

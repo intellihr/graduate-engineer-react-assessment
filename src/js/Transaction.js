@@ -7,4 +7,10 @@ export default class Transaction {
         this.units = units
         this.totalCost = totalCost
     }
+
+    updateTransaction(currencyID, units, totalCost) {
+        this.currencyID = currencyID
+        this.units = units
+        this.totalCost = totalCost
+    }
 }

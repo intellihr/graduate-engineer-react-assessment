@@ -51,7 +51,7 @@ export default class GroupedTransactions extends React.Component {
         const units = parseInt(e.target.elements.units.value)
         const totalCost = parseInt(e.target.elements.totalCost.value)
 
-        this.props.addTransaction(currencyID,units,totalCost)
+        this.props.addTransaction(currencyID, units, totalCost)
 
         e.target.elements.units.value = ''
         e.target.elements.totalCost.value = ''
@@ -123,6 +123,7 @@ export default class GroupedTransactions extends React.Component {
     }
 
     // todo
-    // 1. Add ability to edit transactions
+    // 1. Edit form needs to select the correct currency by default
     // 2. Resolve issue where no value can be entered in the form number fields
+    // 3. Return success message for when transaction has been edited successfully (or route the user back to the grouped transactions page)
 }

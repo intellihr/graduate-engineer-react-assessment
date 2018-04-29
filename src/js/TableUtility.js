@@ -66,4 +66,38 @@ export default class TableUtility {
             </form>
         )
     }
+
+    static generateEditTransactionForm(transaction, currencies, editTransactionFunction) {
+        return (
+            <form onSubmit={editTransactionFunction}>
+                <table className="table">
+                    {TableUtility.generateHeaderRow(["Currency Type", "Units Purchased", "Total Cost (AUD)", "", ""])}
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select required className="form-control" name="currency">
+                                    {currencies.map((currency, index) => {
+                                        if (currency.id === transaction.currencyID) {
+                                            return <option defaultValue value={currency.id} key={currency.id}>{currency.name}</option>
+                                        }
+
+                                        return <option value={currency.id} key={currency.id}>{currency.name}</option>
+                                    })}
+                                </select>
+                            </td>
+                            <td>
+                                <input className="form-control" type="number" min="1" id="units" defaultValue={transaction.units}/>
+                            </td>
+                            <td>
+                                <input className="form-control" type="number" min="1" id="totalCost" defaultValue={transaction.totalCost}/>
+                            </td>
+                            <td>
+                                <button className="btn btn-primary">Edit Transaction</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        )
+    }
 }

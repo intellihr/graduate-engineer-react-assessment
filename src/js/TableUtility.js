@@ -44,11 +44,9 @@ export default class TableUtility {
                     <tbody>
                         <tr>
                             <td>
-                                <select required className="form-control" name="currency">
-                                    <option value="" defaultValue hidden>Select Currency</option>
-                                    {currencies.map((currency, index) => {
-                                        return <option value={currency.id} key={currency.id}>{currency.name}</option>
-                                    })}
+                                <select required defaultValue="default" className="form-control" name="currency">
+                                    <option value="" key="default" hidden>Select Currency</option>
+                                    {currencies.map((currency, index) => <option value={currency.id} key={currency.id}>{currency.name}</option>)}
                                 </select>
                             </td>
                             <td>
@@ -75,14 +73,8 @@ export default class TableUtility {
                     <tbody>
                         <tr>
                             <td>
-                                <select required className="form-control" name="currency">
-                                    {currencies.map((currency, index) => {
-                                        if (currency.id === transaction.currencyID) {
-                                            return <option defaultValue value={currency.id} key={currency.id}>{currency.name}</option>
-                                        }
-
-                                        return <option value={currency.id} key={currency.id}>{currency.name}</option>
-                                    })}
+                                <select defaultValue={transaction.currencyID} required className="form-control" name="currency">
+                                    {currencies.map((currency, index) => <option value={currency.id} key={currency.id}>{currency.name}</option>)}
                                 </select>
                             </td>
                             <td>

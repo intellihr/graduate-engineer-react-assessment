@@ -22,7 +22,6 @@ export default class GroupedTransactions extends React.Component {
         super(props)
         this.transactionsForCurrency = this.transactionsForCurrency.bind(this)
         this.handleAddTransaction = this.handleAddTransaction.bind(this)
-        this.allTransactionsTableRows = this.allTransactionsTableRows.bind(this)
         this.addTransactionForm = this.addTransactionForm.bind(this)
         this.transactionRow = this.transactionRow.bind(this)
         this.renderTransactionsTotal = this.renderTransactionsTotal.bind(this)
@@ -61,12 +60,6 @@ export default class GroupedTransactions extends React.Component {
         const currency = this.currencies.find((currency) => currency.id === transaction.currencyID)
         const deleteFunction = (e) => this.props.removeTransaction(transaction.id)
         return TableUtility.generateTransactionRow(transaction.id, currency.name, transaction.units, transaction.totalCost, deleteFunction)
-    }
-
-    allTransactionsTableRows() {
-        return this.transactions.map((transaction, index) => {
-            return this.transactionRow(transaction)
-        })
     }
 
     addTransactionForm() {

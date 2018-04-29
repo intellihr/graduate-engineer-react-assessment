@@ -11,13 +11,12 @@ export default class EditTransaction extends React.Component {
     get editTransactionForm () {
         const {
             transaction,
-            currencies,
-            editTransaction
+            currencies
         } = this.props
 
         if (isUndefined(transaction)) {
             return (
-                <div>Please provide a valid transaction ID</div>
+                <div className="alert alert-danger" role="alert">Please provide a valid transaction ID</div>
             )
         }
 
@@ -26,7 +25,8 @@ export default class EditTransaction extends React.Component {
 
     handleEditTransaction(e) {
         const {
-            transaction
+            transaction,
+            editTransaction
         } = this.props
 
         e.preventDefault() // do not reload the whole page on form submission
@@ -35,7 +35,7 @@ export default class EditTransaction extends React.Component {
         const units = parseInt(e.target.elements.units.value)
         const totalCost = parseInt(e.target.elements.totalCost.value)
 
-        this.props.editTransaction(transaction.id, currencyID, units, totalCost)
+        editTransaction(transaction.id, currencyID, units, totalCost)
     }
 
     render() {

@@ -27,55 +27,61 @@ export default class GroupedTransactions extends React.Component {
         this.renderTransactionsTotal = this.renderTransactionsTotal.bind(this)
     }
 
-    get transactions() {
-        const {
-            transactions
-        } = this.props
-
-        return transactions
-    }
-
-    get currencies() {
-        const {
-            currencies
-        } = this.props
-
-        return currencies
-    }
-
     handleAddTransaction(e) {
+        const {
+            addTransaction
+        } = this.props
+
         e.preventDefault() // do not reload the whole page on form submission
 
         const currencyID = e.target.elements.currency.value
         const units = parseInt(e.target.elements.units.value)
         const totalCost = parseInt(e.target.elements.totalCost.value)
 
-        this.props.addTransaction(currencyID, units, totalCost)
+        addTransaction(currencyID, units, totalCost)
 
         e.target.elements.units.value = ''
         e.target.elements.totalCost.value = ''
     }
 
     transactionRow(transaction) {
-        const currency = this.currencies.find((currency) => currency.id === transaction.currencyID)
-        const deleteFunction = (e) => this.props.removeTransaction(transaction.id)
+        const {
+            currencies,
+            removeTransaction
+        } = this.props
+
+        const currency = currencies.find((currency) => currency.id === transaction.currencyID)
+        const deleteFunction = (e) => removeTransaction(transaction.id)
         return TableUtility.generateTransactionRow(transaction.id, currency.name, transaction.units, transaction.totalCost, deleteFunction)
     }
 
     addTransactionForm() {
-        return TableUtility.generateAddTransactionForm(this.currencies, this.handleAddTransaction)
+        const {
+            currencies
+        } = this.props
+
+        return TableUtility.generateAddTransactionForm(currencies, this.handleAddTransaction)
     }
 
     transactionsForCurrency(currencyID) {
-        return this.transactions.filter((transaction) => transaction.currencyID == currencyID)
+        const {
+            transactions
+        } = this.props
+
+        return transactions.filter((transaction) => transaction.currencyID == currencyID)
     }
 
     renderGroupedTransactions() {
-        const distinctCurrencies = [...new Set(this.transactions.map((transaction, index) => transaction.currencyID))]
+        const {
+            transactions,
+            currencies
+        } = this.props
+
+        const distinctCurrencies = [...new Set(transactions.map((transaction, index) => transaction.currencyID))]
 
         return distinctCurrencies.map(currencyID => {
 
-            const currency = this.currencies.find((currency) => currency.id === currencyID)
+            const currency = currencies.find((currency) => currency.id === currencyID)
             const currencyTransactions = this.transactionsForCurrency(currencyID)
             const totalCost = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].totalCost, 0)
             const totalUnits = Object.keys(currencyTransactions).reduce((sum, key) => sum + currencyTransactions[key].units, 0)
@@ -91,8 +97,12 @@ export default class GroupedTransactions extends React.Component {
     }
 
     renderTransactionsTotal() {
-        const totalCost = Object.keys(this.transactions).reduce((sum, key) => sum + this.transactions[key].totalCost, 0)
-        const totalUnits = Object.keys(this.transactions).reduce((sum, key) => sum + this.transactions[key].units, 0)
+        const {
+            transactions
+        } = this.props
+
+        const totalCost = Object.keys(transactions).reduce((sum, key) => sum + transactions[key].totalCost, 0)
+        const totalUnits = Object.keys(transactions).reduce((sum, key) => sum + transactions[key].units, 0)
 
         if (totalUnits != 0) {
             return TableUtility.generateRow([`All Transactions Total`, totalUnits, `$${totalCost}`, "", ""], "table-success")

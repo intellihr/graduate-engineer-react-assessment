@@ -126,6 +126,5 @@ export default class GroupedTransactions extends React.Component {
     }
 
     // todo
-    // 1. Resolve issue where no value can be entered in the form number fields
-    // 2. Return success message for when transaction has been edited successfully (or route the user back to the grouped transactions page)
+    // 1. Return success message for when transaction has been edited successfully (or route the user back to the grouped transactions page)
 }

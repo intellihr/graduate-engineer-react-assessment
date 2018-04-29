@@ -50,10 +50,10 @@ export default class TableUtility {
                                 </select>
                             </td>
                             <td>
-                                <input className="form-control" type="number" min="1" id="units" placeholder="Units Purchased"/>
+                                <input required className="form-control" type="number" min="1" id="units" placeholder="Units Purchased"/>
                             </td>
                             <td>
-                                <input className="form-control" type="number" min="1" id="totalCost" placeholder="Total Cost (AUD)"/>
+                                <input required className="form-control" type="number" min="1" id="totalCost" placeholder="Total Cost (AUD)"/>
                             </td>
                             <td>
                                 <button className="btn btn-primary">Add Transaction</button>
@@ -73,15 +73,15 @@ export default class TableUtility {
                     <tbody>
                         <tr>
                             <td>
-                                <select defaultValue={transaction.currencyID} required className="form-control" name="currency">
+                                <select required defaultValue={transaction.currencyID} className="form-control" name="currency">
                                     {currencies.map((currency, index) => <option value={currency.id} key={currency.id}>{currency.name}</option>)}
                                 </select>
                             </td>
                             <td>
-                                <input className="form-control" type="number" min="1" id="units" defaultValue={transaction.units}/>
+                                <input required className="form-control" type="number" min="1" id="units" defaultValue={transaction.units}/>
                             </td>
                             <td>
-                                <input className="form-control" type="number" min="1" id="totalCost" defaultValue={transaction.totalCost}/>
+                                <input required className="form-control" type="number" min="1" id="totalCost" defaultValue={transaction.totalCost}/>
                             </td>
                             <td>
                                 <button className="btn btn-primary">Edit Transaction</button>

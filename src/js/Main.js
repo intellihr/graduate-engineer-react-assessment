@@ -15,8 +15,8 @@ export default class Main extends React.Component {
     this.state = {
       transactions: [],
       currencies: [
-        new Currency("Garlic Coin", 10),
-        new Currency("Doge Coin", 5)
+        new Currency("Garlic Coin"),
+        new Currency("Doge Coin")
       ]
     }
   }

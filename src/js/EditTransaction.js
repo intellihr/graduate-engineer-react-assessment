@@ -5,12 +5,12 @@ export default class EditTransaction extends React.Component {
         super(props)
     }
 
-    get transactions() {
+    get transaction() {
         const {
-            transactions
+            transaction
         } = this.props
 
-        return transactions
+        return transaction
     }
 
     get currencies() {
@@ -25,8 +25,7 @@ export default class EditTransaction extends React.Component {
         return (
             <div>
                 <h1 className="display-4">Edit Transaction</h1>
-                {console.log(this.transactions)}
-                {console.log(this.props.transactionID)}
+                {console.log(this.transaction)}}
             </div>
         )
     }

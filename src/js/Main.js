@@ -52,9 +52,8 @@ export default class Main extends React.Component {
       <Route path='/edit/:transaction' render={(props) => (
         <EditTransaction
           editTransaction={this.editTransaction}
-          transactions={this.state.transactions}
+          transaction={this.state.transactions.filter((transaction) => transaction.id == props.match.params.transaction)}
           currencies={this.state.currencies}
-          transactionID={props.match.params.transaction}
         />
       )} />
     </Switch>

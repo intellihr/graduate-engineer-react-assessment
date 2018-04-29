@@ -49,12 +49,12 @@ export default class Main extends React.Component {
           currencies={this.state.currencies}
         />
       )} />
-      <Route path='/edit/:transaction' render={(transaction) => (
+      <Route path='/edit/:transaction' render={(props) => (
         <EditTransaction
           editTransaction={this.editTransaction}
           transactions={this.state.transactions}
           currencies={this.state.currencies}
-          transactionID={transaction.match.params.transaction}
+          transactionID={props.match.params.transaction}
         />
       )} />
     </Switch>

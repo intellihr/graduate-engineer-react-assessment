@@ -25,7 +25,6 @@ export default class GroupedTransactions extends React.Component {
         this.allTransactionsTableRows = this.allTransactionsTableRows.bind(this)
         this.addTransactionForm = this.addTransactionForm.bind(this)
         this.transactionRow = this.transactionRow.bind(this)
-        this.handleEditTransaction = this.handleEditTransaction.bind(this)
         this.renderTransactionsTotal = this.renderTransactionsTotal.bind(this)
     }
 
@@ -58,15 +57,10 @@ export default class GroupedTransactions extends React.Component {
         e.target.elements.totalCost.value = ''
     }
 
-    handleEditTransaction(id) {
-        console.log(id)
-    }
-
     transactionRow(transaction) {
         const currency = this.currencies.find((currency) => currency.id === transaction.currencyID)
-        const editFunction = (e) => this.handleEditTransaction(transaction.id)
         const deleteFunction = (e) => this.props.removeTransaction(transaction.id)
-        return TableUtility.generateTransactionRow(transaction.id, currency.name, transaction.units, transaction.totalCost, editFunction, deleteFunction)
+        return TableUtility.generateTransactionRow(transaction.id, currency.name, transaction.units, transaction.totalCost, deleteFunction)
     }
 
     allTransactionsTableRows() {

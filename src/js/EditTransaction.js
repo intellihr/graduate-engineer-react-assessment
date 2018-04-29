@@ -5,11 +5,28 @@ export default class EditTransaction extends React.Component {
         super(props)
     }
 
+    get transactions() {
+        const {
+            transactions
+        } = this.props
+
+        return transactions
+    }
+
+    get currencies() {
+        const {
+            currencies
+        } = this.props
+
+        return currencies
+    }
+
     render() {
-        console.log(this.props)
         return (
             <div>
                 <h1 className="display-4">Edit Transaction</h1>
+                {console.log(this.transactions)}
+                {console.log(this.props.transactionID)}
             </div>
         )
     }

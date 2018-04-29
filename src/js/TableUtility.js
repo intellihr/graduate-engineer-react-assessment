@@ -1,4 +1,5 @@
 import uuid from 'uuid'
+import { Link } from 'react-router-dom'
 
 export default class TableUtility {
 
@@ -20,14 +21,14 @@ export default class TableUtility {
         )
     }
 
-    static generateTransactionRow(id, currencyName, units, totalCost, editFunction, deleteFunction) {
+    static generateTransactionRow(id, currencyName, units, totalCost, deleteFunction) {
         return (
             <tr key={id}>
                 <td>{currencyName}</td>
                 <td>{units}</td>
                 <td>${totalCost}</td>
                 <td>
-                    <button className="btn btn-warning" onClick={editFunction}>Edit</button>
+                    <Link className="btn btn-warning" to={`\edit\/${id}`}>Edit</Link>
                 </td>
                 <td>
                     <button className="btn btn-danger" onClick={deleteFunction}>Remove</button>

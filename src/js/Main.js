@@ -1,0 +1,67 @@
+// Notes:
+// 1. Added uuid package to generate unique IDs
+// 2. Working with whole numbers, as opposed to decimals, for simplicity
+// 3. Assumed that the user does not define the currencies that are valid, but rather a list is provided
+
+import { Switch, Route } from 'react-router-dom'
+import Currency from './Currency'
+import Transaction from './Transaction'
+import GroupedTransactions from './GroupedTransactions'
+import EditTransaction from './EditTransaction'
+
+export default class Main extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.addTransaction = this.addTransaction.bind(this)
+    this.removeTransaction = this.removeTransaction.bind(this)
+    this.editTransaction = this.editTransaction.bind(this)
+
+    this.state = {
+      transactions: [],
+      currencies: [
+        new Currency("Garlic Coin"),
+        new Currency("Doge Coin")
+      ]
+    }
+  }
+
+  addTransaction(currencyID, units, totalCost) {
+    this.setState((prevState) => ({
+      transactions: prevState.transactions.concat(new Transaction(currencyID, units, totalCost))
+    }))
+  }
+
+  removeTransaction(id) {
+    this.setState((prevState) => ({
+      transactions: prevState.transactions.filter((transaction) => transaction.id !== id)
+    }))
+  }
+
+  editTransaction(id, currencyID, units, totalCost) {
+    const transaction = this.state.transactions.filter((transaction) => transaction.id == id)[0]
+    transaction.updateTransaction(currencyID, units, totalCost)
+  }
+
+  render() {
+    return (
+      <Switch>
+      <Route exact path='/' render={() => (
+        <GroupedTransactions
+          addTransaction={this.addTransaction}
+          removeTransaction={this.removeTransaction}
+          transactions={this.state.transactions}
+          currencies={this.state.currencies}
+        />
+      )} />
+      <Route path='/edit/:transaction' render={(props) => (
+        <EditTransaction
+          editTransaction={this.editTransaction}
+          transaction={this.state.transactions.filter((transaction) => transaction.id == props.match.params.transaction)[0]}
+          currencies={this.state.currencies}
+        />
+      )} />
+    </Switch>
+    )
+  }
+}

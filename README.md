@@ -51,3 +51,20 @@ Please read all of the project details before starting. Feel free to complete th
 
 ### Stretch Goals
 1. I may be able to see the value of my cryptocurrencies based on the current price published by an exchange or index website. For example,  CoinMarketCap Public API (https://coinmarketcap.com/api/).
+
+## Completion
+When you have finished the assessment and are ready to submit your solution, please run the following script along with your name according to your operating system in order to generate a compressed file consisting of your project files and folders in the `build` folder.
+
+Should something go wrong when executing the script, please compress your project files and folders manually **excluding** the files and folders listed in the `.compressignore` file.
+
+Once you have obtained the compressed file, please submit the file as instructed.
+
+### Windows
+With administrative privileges, run `.\bin\compress.cmd YOUR NAME` on Command Prompt or Powershell.
+
+For example, when Amanda Berry finishes her assessment, she will run `.\bin\compress.cmd amanda berry` and find a compressed file (`2000-01-01-amanda-berry.zip`) containing her project files and folders in the `build` folder.
+
+### Unix-Based Operating Systems
+Run `./bin/compress YOUR NAME` on your terminal of choice.
+
+For example, when Adam Berry finishes his assessment, he will run `./bin/compress adam berry` and find a compressed file (`2000-01-01-adam-berry.tar.gz`) containing his project files and folders in the `build` folder.

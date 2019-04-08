@@ -1,0 +1,25 @@
+#!/bin/bash
+
+buildFolderName="build"
+declare -a excludes
+
+while IFS= read line
+do
+  excludes=("--exclude=./$line" "${excludes[@]}")
+done <"./.compressignore"
+
+IFS=' '
+read -ra ADDR <<< "$@"
+i=0
+for nameBlock in "${ADDR[@]}"; do
+  ADDR[$i]="$( echo "$nameBlock" | tr '[:upper:]' '[:lower:]' )"
+  i=$((i+1))
+done
+
+filename="$(date +%Y-%m-%d)-$(IFS=- ; echo "${ADDR[*]}").tar.gz"
+
+mkdir -p "./$buildFolderName"
+
+tar $(IFS=\  ; echo "${excludes[*]}") -czvf ./$buildFolderName/$filename . && \
+echo "Compressed successfully. Please find the compressed file in the \"./build\" folder and upload it as instructed." || \
+echo "Failed to compress your project. Please manually do so (remember to exclude all folders/files listed in \".compressignore\" file)."

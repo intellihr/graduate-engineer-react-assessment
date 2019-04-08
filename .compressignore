@@ -1,0 +1,4 @@
+.git
+node_modules
+build
+docker-compose.override.yml

@@ -1,5 +1,5 @@
-# Cryptocurrency Portfolio
-Hiring assessment for frontend web application development using React.
+# Word Master
+Hiring assessment for the analytics team using ReactJS.
 
 ## Setup
 ### Windows
@@ -27,27 +27,27 @@ Follow the instruction from **one of the following** depending on which software
 ##### NPM
 1. Run `./bin/npm`
 
-## Tips
-1. Give running commentary of your thought process so we can best understand your approach.
-2. You can use any libraries you want. There's no need to reinvent the wheel.
-3. Feel free to Google. We're not testing your memory.
-4. We encourage you to ask questions and involve your intelliHR engineer. You can almost think of this as a pair programming exercise.
-5. If you'd like to be adventurous (e.g. use Redux, functional programming, etc.), impress us!
+## Project: Word Master
+As a part of the hiring assessment, you will tackle an optimization problem by implementing an application using ReactJS.
 
-## Project: Cryptocurrency Portfolio
-Please read all of the project details before starting. Feel free to complete them in any order that makes sense to you.
+Given a scenario which you are playing a word game competing with your friends. The game is a lot like Scrabble or Words With Friends, if you've played those. Letters are dealt to players, who then construct one or more words out of their letters. Each **valid** word receives a score, based on the length of the word and the letters in that word.
 
-### User Stories
-1. I must be able to record a transaction with the following details:
-   - What cryptocurrency was purchased
-   - How many units of the cryptocurrency were purchased
-   - What was the total purchase price, in AUD, of the transaction
-2. I must be able to see a list of all of my recorded transactions grouped by cryptocurrency. For each cryptocurrency owned, show the following:
-   - Units owned
-   - Total paid in AUD
-3. I must be able to see the sum total AUD I have paid for all of my cryptocurrencies.
-4. I must be able to delete transactions.
-5. I must be able to edit transactions.
+The rules of the game are as follows:
 
-### Stretch Goals
-1. I may be able to see the value of my cryptocurrencies based on the current price published by an exchange or index website. For example,  CoinMarketCap Public API (https://coinmarketcap.com/api/).
+**Dealing**
+- A player is dealt a hand of *n* letters chosen at random.
+- The player arranges the hand into as many words as they want out of the letters, using each letter at most once.
+- Some letters may remain unused (these won't be scored).
+
+**Scoring**
+- The score for the hand is the sum of the scores for each valid word formed.
+- The score for a word is the sum of the points for letters in the word, multiplied by the length of the word, plus 50 points if all *n* letters are used on the first word created. We have provided a JSON file *src/assets/words.json* which lists all valid words.
+- Letters are scored as in Scrabble: A is worth 1, B is worth 3, C is worth 3, D is worth 2, E is worth 1, and so on. We have provided a JSON file *src/assets/letter-values.json* which maps each lowercase letter to its Scrabble letter value.
+- For example, "queen" would be worth 70 points ((10 + 1 + 1 + 1 + 1) for the five letters, then multiply by the number of letters to get (10 + 1 + 1 + 1 + 1) x 5 = 70). Be sure to check that the hand actually has 1 "q", 1 "u", 2 "e", and 1 "n" before scoring the word!
+- As another example, if *n = 7* and you make the word "waybill" on the first try, it would be worth 155 points (the base score for "waybill" is (4 + 1 + 4 + 3 + 1 + 1 + 1) * 7 = 105, plus an additional 50 point bonus for using all *n* letters).
+
+Since you want to humiliatingly defeat your friends very badly, you are going to exploit your knowledge of computer science and software engineering to implement an interactive ReactJS application which finds the optimal outcome of a game given a hand so that your friends can never win any game.
+
+The definition of the optimal outcome of a game is a way to arrange and play the letters in a hand which results in the highest possible points of the game in total. For example, given a new game with an initial hand of "a r e t i i n", the application should advise you to play "inertia", which you can earn 99 points in total, and there is no other ways to get a better outcome than that.
+
+In short, your ReactJS application needs to be able to receive a list of letters as the input, and generate the optimal solution as the output.

@@ -36,7 +36,7 @@ The rules of the game are as follows:
 
 **Dealing**
 - A player is dealt a hand of *n* letters chosen at random.
-- The player arranges the hand into as many words as they want out of the letters, using each letter at most once.
+- The player arranges the hand into **as many words as they want** out of the letters, using each letter at most once.
 - Some letters may remain unused (these won't be scored).
 
 **Scoring**

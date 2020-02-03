@@ -51,3 +51,11 @@ Since you want to humiliatingly defeat your friends very badly, you are going to
 The definition of the optimal outcome of a game is a way to arrange and play the letters in a hand which results in the highest possible points of the game in total. For example, given a new game with an initial hand of "a r e t i i n", the application should advise you to play "inertia", which you can earn 99 points in total, and there is no other ways to get a better outcome than that.
 
 In short, your ReactJS application needs to be able to receive a list of letters as the input, and generate the optimal solution as the output.
+
+**Examples**
+
+| Hands | Optimal Words Combination | Optimal Score |
+|-------|---------------------------|---------------|
+| aaaab | aa , aa                   | 8             |
+| odg   | dog                       | 65            |
+| odgz  | dog                       | 15            |

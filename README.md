@@ -56,5 +56,5 @@ In short, your ReactJS application needs to be able to receive a list of letters
 
 | Hands | Optimal Words Combination | Optimal Score |
 |-------|---------------------------|---------------|
-| aaaab | aa , aa                   | 8             |
+| aaaaz | za , aa                   | 26            |
 | odgz  | dog                       | 15            |

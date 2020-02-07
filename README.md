@@ -1,5 +1,33 @@
-# Cryptocurrency Portfolio
-Hiring assessment for frontend web application development using React.
+# Graduate React Task
+
+Your task is to **create a cryptocurrency portfolio** with React. Do your best to complete the task before the due date your hiring manager has given you. Features and gimmicks outside of the requirements specified below will **not** be taken into consideration when assessing your code.
+
+The following features are **required**:
+
+- The user can add, edit, and delete transactions
+  - A transaction should store the following:
+    - The cryptocurrency
+    - The amount of units purchased
+    - The total price paid for the transaction
+- The user can see a list of all of their transactions.
+  - This list should be grouped by cryptocurrency
+- The user should see a total of how much money (in AUD) that they have spent.
+
+***Optionally***, you may also add functionality to view the current value of the portfolio based on an API. We recommend CoinMarketCap (https://coinmarketcap.com/api/). **This is not necessary in order to pass the assessment**, but if you’re confident that you can execute this successfully, it is a chance for you to showcase additional skills.
+
+**Keep it simple**:
+
+- Don't build your own backend server. We don't expect the data to persist after a page refresh.
+- Don't spend a lot of time on styling. A simple/plain design is better than trying to impress us.
+- Don't reinvent the wheel. Feel free to use third party packages where it makes sense to do so.
+- Build something that you’re proud of and would personally enjoy using. 
+- Your code should be easy to read and maintain. 
+
+**Focus on building an app that is pleasant to read (for the development team) and use (for your end users).**
+
+If you have any questions, please don't hesitate to ask your hiring manager via email. 
+
+When you're finished please send us your code via Github or a .zip file emailed to your hiring manager. Make sure to delete the `node_modules` folder before you do so.
 
 ## Setup
 ### Windows
@@ -26,28 +54,3 @@ Follow the instruction from **one of the following** depending on which software
 
 ##### NPM
 1. Run `./bin/npm`
-
-## Tips
-1. Give running commentary of your thought process so we can best understand your approach.
-2. You can use any libraries you want. There's no need to reinvent the wheel.
-3. Feel free to Google. We're not testing your memory.
-4. We encourage you to ask questions and involve your intelliHR engineer. You can almost think of this as a pair programming exercise.
-5. If you'd like to be adventurous (e.g. use Redux, functional programming, etc.), impress us!
-
-## Project: Cryptocurrency Portfolio
-Please read all of the project details before starting. Feel free to complete them in any order that makes sense to you.
-
-### User Stories
-1. I must be able to record a transaction with the following details:
-   - What cryptocurrency was purchased
-   - How many units of the cryptocurrency were purchased
-   - What was the total purchase price, in AUD, of the transaction
-2. I must be able to see a list of all of my recorded transactions grouped by cryptocurrency. For each cryptocurrency owned, show the following:
-   - Units owned
-   - Total paid in AUD
-3. I must be able to see the sum total AUD I have paid for all of my cryptocurrencies.
-4. I must be able to delete transactions.
-5. I must be able to edit transactions.
-
-### Stretch Goals
-1. I may be able to see the value of my cryptocurrencies based on the current price published by an exchange or index website. For example,  CoinMarketCap Public API (https://coinmarketcap.com/api/).
